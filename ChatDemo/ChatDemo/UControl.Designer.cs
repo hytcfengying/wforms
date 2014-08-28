@@ -44,6 +44,7 @@
             this.pic_FHeader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_FHeader.TabIndex = 0;
             this.pic_FHeader.TabStop = false;
+            this.pic_FHeader.DoubleClick += new System.EventHandler(this.pic_FHeader_DoubleClick);
             // 
             // lab_FNicName
             // 
@@ -103,10 +104,10 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pic_FHeader;
-        private System.Windows.Forms.Label lab_FNicName;
-        private System.Windows.Forms.Label lab_FShuoshuo;
-        private System.Windows.Forms.Label lab_IP;
-        private System.Windows.Forms.Label lab_isopen;
+        public System.Windows.Forms.PictureBox pic_FHeader;
+        public System.Windows.Forms.Label lab_FNicName;
+        public System.Windows.Forms.Label lab_FShuoshuo;
+        public System.Windows.Forms.Label lab_IP;
+        public System.Windows.Forms.Label lab_isopen;
     }
 }

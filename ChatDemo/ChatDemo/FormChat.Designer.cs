@@ -247,14 +247,14 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txt_content;
+        public System.Windows.Forms.TextBox txt_content;
         private System.Windows.Forms.TextBox txt_msg;
         private System.Windows.Forms.Button btn_close;
         private System.Windows.Forms.Button btn_send;
-        private System.Windows.Forms.Label lab_shuoshuo;
-        private System.Windows.Forms.Label lab_IP;
-        private System.Windows.Forms.PictureBox pic_image;
-        private System.Windows.Forms.Label lab_name;
+        public System.Windows.Forms.Label lab_shuoshuo;
+        public System.Windows.Forms.Label lab_IP;
+        public System.Windows.Forms.PictureBox pic_image;
+        public System.Windows.Forms.Label lab_name;
         private System.Windows.Forms.ImageList cImageList;
     }
 }

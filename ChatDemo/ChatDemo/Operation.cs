@@ -12,12 +12,14 @@ namespace ChatDemo
     {
         private FormFriendList _ffl;
 
-        public Operation(FormFriendList ffl)
+        private FormChat _fc;
+
+        public Operation(FormFriendList ffl,FormChat fc)
         {
             _ffl = ffl;
+
+            _fc = fc;
         }
-
-
         static List<Friend> Listfriend = new List<Friend>();
         //定义委托
         public delegate void delucfshow(Friend friend);
@@ -31,43 +33,51 @@ namespace ChatDemo
             
             //FormFriendList ffl = this;
             UControl fuc = new UControl();
+
             fuc.Ffl = _ffl;
+
             fuc.CurFriend = friend;
+            //fuc.for = _fc;
+
             Listfriend.Add(friend);
             //双击事件
             fuc.DoubleClick += new EventHandler(_ffl.fuc_DoubleClick);
-            fuc.Top = _ffl.pn_FriendList.Controls.Count * fuc.Height;
 
-            //List<Friend> lf = new List<Friend>();
-            //lf
+            fuc.Top = _ffl.pn_FriendList.Controls.Count * fuc.Height;
 
             _ffl.pn_FriendList.Controls.Add(fuc);
 
         }
-        public delegate void delucfclose(IPAddress ip);
-        /// <summary>
-        /// 代理移除好友
-        /// </summary>
-        /// <param name="ipAll"></param>
-        /// <param name="msgAll"></param>
-        public void ucfclose(IPAddress ip)
-        {
-            IPAddress ipa = ip;
-            int slength = Listfriend.Count;
-            for (int i = 0; i < slength; i++)
-            {
-                if (ip.ToString() == Listfriend[i].IP.ToString())
-                {
-                    Listfriend.RemoveAt(i);
-                    _ffl.pn_FriendList.Controls.RemoveAt(i);
-                }
+        //public delegate void delucfclose(IPAddress ip);
+        ///// <summary>
+        ///// 代理移除好友
+        ///// </summary>
+        ///// <param name="ipAll"></param>
+        ///// <param name="msgAll"></param>
+        //public void ucfclose(IPAddress ip)
+        //{
+        //    IPAddress ipa = ip;
+        //    //int slength = Listfriend.Count;
+        //    for (int i = 0; i < Listfriend.Count; i++)
+        //    {
+        //        if (ip.ToString() == Listfriend[i].IP.ToString())
+        //        {
+        //            Listfriend.RemoveAt(i);
+        //            _ffl.pn_FriendList.Controls.RemoveAt(i);
+        //        }
 
-            }
-            _ffl.pn_FriendList.Controls.Clear();
+        //    }
+        //    _ffl.pn_FriendList.Controls.Clear();
 
-            
+        //    UControl fuc = new UControl();
+        //    for (int i = 0; i < Listfriend.Count; i++) 
+        //    {
+        //        fuc.CurFriend = Listfriend[i].friend;
+        //        _ffl.pn_FriendList.Controls.Add(fuc);
 
-        }
+        //    }
+
+        //}
 
 
         //获得本机IPv4
@@ -77,7 +87,9 @@ namespace ChatDemo
             //ipa = Dns.GetHostAddresses(Dns.GetHostName()).Where(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).First();
             //return ipa;
             IPAddress myIP=null;
+
             IPAddress[] ips = Dns.GetHostAddresses(Dns.GetHostName());
+
             foreach ( IPAddress ip in ips )
             {
                 if (ip.AddressFamily==AddressFamily.InterNetwork)
@@ -92,23 +104,16 @@ namespace ChatDemo
         public void SendMsg(string ipAll, string msgAll)
         {
             UdpClient uc = new UdpClient();
+
             IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(ipAll), 9527);
+
             string inmsg = msgAll;
+
             byte[] binmsg = Encoding.Default.GetBytes(inmsg);
+
             uc.Send(binmsg, binmsg.Length, ipep);
 
         }
-        /// <summary>
-        /// list
-        /// </summary>
-        /// <param name="f"></param>
-        /// <returns></returns>
-        //public List<Friend> lf;
-        //public List<Friend> getFriendList(Friend f)
-        //{
-            
-        //    lfriend.Add(f);
-        //}
 
         //监听程序
         public void listen()
@@ -160,13 +165,7 @@ namespace ChatDemo
 
                         fLogin.imageIndex = Convert.ToInt32(data[2]);
 
-
-
-                        
-                        
-
-
-
+                        fLogin.formchat = new FormChat(fLogin);
 
                         object[] paraLogin = new object[1];
 
@@ -181,26 +180,41 @@ namespace ChatDemo
 
                     //判断下线
                     case "LOGOUT":
-
-                        
-                        if (ip == GetMyIP().ToString())
+                        //删除下线好友的控件
+                        int lofucIndex = 0;
+                        foreach (UControl lofuc in _ffl.pn_FriendList.Controls)
                         {
-                            continue;
+                            for (int i = 0; i < _ffl.pn_FriendList.Controls.Count; i++)
+                            {
+                                _ffl.pn_FriendList.Controls.Remove(lofuc);
+                                break;
+                            }
+                            lofucIndex++;
+                        }
+                        foreach (UControl lofuc in _ffl.pn_FriendList.Controls)
+                        {
+                            for (int i = lofucIndex; i < _ffl.pn_FriendList.Controls.Count; i++)
+                            {
+                                _ffl.pn_FriendList.Controls[i].Top = _ffl.pn_FriendList.Controls[0].Height * i;
+                                
+                            }
                         }
 
-                        Friend fLogout = new Friend();
+                            //if (ip == GetMyIP().ToString())
+                            //{
+                            //    continue;
+                            //}
 
-                        fLogout.IP = IPAddress.Parse(ip);
+                            //Friend fLogout = new Friend();
 
+                            //fLogout.IP = IPAddress.Parse(ip);
 
- 
-                        object[] paraLogout = new object[1];
-                        paraLogout[0] = fLogout.IP;
-                        _ffl.Invoke(new delucfclose(this.ucfclose), paraLogout);
+                            //object[] paraLogout = new object[1];
 
+                            //paraLogout[0] = fLogout.IP;
 
-                        
-                        
+                            //_ffl.Invoke(new delucfclose(this.ucfclose), paraLogout);
+
                         break;
 
                     //判断是不是已经登录
@@ -210,24 +224,20 @@ namespace ChatDemo
                             continue;
                         }
 
-
-
                         Friend fAlsoon = new Friend();
-                        fAlsoon.nickName = data[1];
-                        fAlsoon.shuoshuo = data[3];
-                        fAlsoon.IP = IPAddress.Parse(ip);
-                        //MessageBox.Show(data[2]);
-                        //判断传来的头像是不是存在
-                        //if (Convert.ToInt32(data[2]) < 0 || Convert.ToInt32(data[2]) > this.fPicList.Images.Count)
-                        //{
-                        //    continue;
-                        //}
 
+                        fAlsoon.nickName = data[1];
+
+                        fAlsoon.shuoshuo = data[3];
+
+                        fAlsoon.IP = IPAddress.Parse(ip);
+                        
                         fAlsoon.imageIndex = Convert.ToInt32(data[2]);
 
-                        //object[] para = new Object[1];
                         object[] paraAlsoon = new object[1];
+
                         paraAlsoon[0] = fAlsoon;
+
                         _ffl.Invoke(new delucfshow(this.ucfshow), paraAlsoon);
 
                         break;
@@ -237,11 +247,23 @@ namespace ChatDemo
                         {
                             continue;
                         }
-
+                        foreach (UControl msgfuc in _ffl.pn_FriendList.Controls)
+                        {
+                            for (int i = 0; i < _ffl.pn_FriendList.Controls.Count; i++)
+                            {
+                                //_fc = msgfuc;
+                                //_ffl.pn_FriendList.Controls[i].
+                                msgfuc.CurFriend.formchat.txt_content.Text += msgfuc.CurFriend.formchat.lab_name.Text + ":\r\n";
+                                msgfuc.CurFriend.formchat.txt_content.Text += data[1] + "\r\n";
+                                break;
+                                //_fc.txt_content.Text += data[1] + "\r\n";
+                            }
+                        }
 
                         break;
 
                     default:
+
                         break;
                 }
             }

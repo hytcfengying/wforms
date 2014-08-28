@@ -26,18 +26,37 @@ namespace ChatDemo
             {
                 return;
             }
-            FormChat fc = new FormChat(fuc.CurFriend);
+            //FormChat fc = new FormChat(fuc.CurFriend);
+            fuc.CurFriend.isopen = true;
+           // fuc.CurFriend.formchat.Show();
+            fuc.CurFriend.formchat.Show();
+            //fc.Show();
+            //FormChat fc = 
+            //fuc.CurFriend.formchat(fuc.CurFriend).show();
+            //FormChat fc = fuc.Fc(fuc.CurFriend);
             
             //Operation oper = new Operation();
             //oper.getFriendList(fuc.CurFriend)
-            fuc.CurFriend.isopen = true;
-            fc.Show();
+            //List<UControl> uc = new List<UControl>();
+            
+            //foreach (UControl msgfuc in this.pn_FriendList.Controls)
+            //{
+            //    if (msgfuc.CurFriend.IP.ToString() == fuc.CurFriend.IP.ToString())
+            //    {
+                    
+            //    }
+            //}
+
+            
+            //fc.Show();
+            //fuc.Fc.Show();
         }
         //private Thread th;
+        FormChat fc = new FormChat();
         private void FormFriendList_Load(object sender, EventArgs e)
         {
             
-            Operation oper = new Operation(this);
+            Operation oper = new Operation(this,fc);
             
             FormMain.CheckForIllegalCrossThreadCalls = false;
 
@@ -53,8 +72,8 @@ namespace ChatDemo
 
             oper.SendMsg("255.255.255.255", "LOGIN|"+ oper.GetMyIP() +"|0|hi");
 
-           
 
+           
             
         }
 
@@ -63,7 +82,7 @@ namespace ChatDemo
         {
             
 
-            Operation oper = new Operation(this);
+            Operation oper = new Operation(this,fc);
             oper.SendMsg("255.255.255.255", "LOGOUT");
 
         }

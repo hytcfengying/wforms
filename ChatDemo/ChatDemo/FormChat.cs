@@ -54,7 +54,7 @@ namespace ChatDemo
             string timetoday = DateTime.Now.ToString() + "\r\n";
             string[] timenow = timetoday.Split(' ');
             this.txt_content.Text += "我" + ' ' + timenow[1];
-            this.txt_content.Text += this.txt_msg.Text + "\r\n";
+            this.txt_content.Text += "MSG|"+this.txt_msg.Text + "\r\n";
             this.txt_msg.Text = "";
         }
         

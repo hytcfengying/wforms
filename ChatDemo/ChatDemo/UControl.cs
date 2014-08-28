@@ -20,6 +20,17 @@ namespace ChatDemo
             set { ffl = value; }
         }
 
+        //private FormChat fc;
+
+        //public FormChat Fc
+        //{
+        //    get { return fc; }
+        //    set {
+        //        fc = CurFriend;
+                
+        //    }
+        //}
+
 
 
 
@@ -38,6 +49,19 @@ namespace ChatDemo
                 //curFriend.imageIndex = ffl.fPicList.Images.
                 this.pic_FHeader.Image = this.ffl.fPicList.Images[value.imageIndex];
                 this.lab_isopen.Text = value.isopen.ToString();
+                //FormChat fc = value.formchat;
+                CurFriend.formchat = new FormChat(value);
+                //cfc.lab_name.Text = "";
+                //cfc.lab_IP.Text = "192.168.1.35";
+                //cfc.lab_shuoshuo.Text = "";
+                //cfc.pic_image.Image = this.ffl.fPicList.Images[3];
+                CurFriend.formchat.lab_name.Text = value.nickName;
+                CurFriend.formchat.lab_IP.Text = value.IP.ToString();
+                CurFriend.formchat.lab_shuoshuo.Text = value.shuoshuo;
+                //cfc.pic_image = value.imageIndex;
+                CurFriend.formchat.pic_image.Image = this.ffl.fPicList.Images[value.imageIndex];
+                CurFriend.formchat.lab_name.Text = value.nickName;
+                
                 //this.pic_FHeader.Image = this.ffl.fPicList.Images[2];
             }
         }
@@ -48,6 +72,11 @@ namespace ChatDemo
         }
 
         private void UControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pic_FHeader_DoubleClick(object sender, EventArgs e)
         {
 
         }
