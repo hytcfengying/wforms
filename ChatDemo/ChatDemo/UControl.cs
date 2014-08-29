@@ -46,23 +46,17 @@ namespace ChatDemo
                 this.lab_FNicName.Text = value.nickName;
                 this.lab_FShuoshuo.Text = value.shuoshuo;
                 this.lab_IP.Text = value.IP.ToString();
-                //curFriend.imageIndex = ffl.fPicList.Images.
                 this.pic_FHeader.Image = this.ffl.fPicList.Images[value.imageIndex];
                 this.lab_isopen.Text = value.isopen.ToString();
-                //FormChat fc = value.formchat;
+                //this.ti_ucfriend.Enabled = true;
+                //CurFriend.formchat = new FormChat(value);
                 CurFriend.formchat = new FormChat(value);
-                //cfc.lab_name.Text = "";
-                //cfc.lab_IP.Text = "192.168.1.35";
-                //cfc.lab_shuoshuo.Text = "";
-                //cfc.pic_image.Image = this.ffl.fPicList.Images[3];
                 CurFriend.formchat.lab_name.Text = value.nickName;
                 CurFriend.formchat.lab_IP.Text = value.IP.ToString();
                 CurFriend.formchat.lab_shuoshuo.Text = value.shuoshuo;
-                //cfc.pic_image = value.imageIndex;
                 CurFriend.formchat.pic_image.Image = this.ffl.fPicList.Images[value.imageIndex];
                 CurFriend.formchat.lab_name.Text = value.nickName;
-                
-                //this.pic_FHeader.Image = this.ffl.fPicList.Images[2];
+
             }
         }
 
@@ -79,6 +73,33 @@ namespace ChatDemo
         private void pic_FHeader_DoubleClick(object sender, EventArgs e)
         {
 
+        }
+
+        private void ti_ucfriend_Tick(object sender, EventArgs e)
+        {
+            //this.ti_ucfriend.Enabled = true;
+            
+            if (this.pic_FHeader.Top == 11 && this.pic_FHeader.Left == 11)
+            {
+                this.pic_FHeader.Top = 58;
+                this.pic_FHeader.Left = 58;
+                
+            }
+            if (this.pic_FHeader.Top == 58 && this.pic_FHeader.Left == 58)
+            {
+                this.pic_FHeader.Top = 10;
+                this.pic_FHeader.Left = 10;
+            }
+            if (this.pic_FHeader.Top == 10 && this.pic_FHeader.Left == 10)
+            {
+                this.pic_FHeader.Top = 19;
+                this.pic_FHeader.Left = 19;
+            }
+            if (this.pic_FHeader.Top == 19 && this.pic_FHeader.Left == 19)
+            {
+                this.pic_FHeader.Top = 11;
+                this.pic_FHeader.Left = 11;
+            }
         }
 
         //private void UControl_DoubleClick(object sender, EventArgs e)

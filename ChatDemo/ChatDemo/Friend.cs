@@ -22,5 +22,10 @@ namespace ChatDemo
 
         public FormChat formchat { get; set; }
 
+        public string[] unreadMessage { get; set; }
+
+        public bool startJump { get; set; }
+
+        public bool stopJump { get; set; }
     }
 }

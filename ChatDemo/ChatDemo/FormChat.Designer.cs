@@ -238,6 +238,7 @@
             this.Controls.Add(this.txt_content);
             this.Name = "FormChat";
             this.Text = "FormChat";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormChat_FormClosing);
             this.Load += new System.EventHandler(this.FormChat_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pic_image)).EndInit();
             this.ResumeLayout(false);

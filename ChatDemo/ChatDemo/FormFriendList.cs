@@ -26,30 +26,14 @@ namespace ChatDemo
             {
                 return;
             }
-            //FormChat fc = new FormChat(fuc.CurFriend);
             fuc.CurFriend.isopen = true;
-           // fuc.CurFriend.formchat.Show();
+           
             fuc.CurFriend.formchat.Show();
-            //fc.Show();
-            //FormChat fc = 
-            //fuc.CurFriend.formchat(fuc.CurFriend).show();
-            //FormChat fc = fuc.Fc(fuc.CurFriend);
-            
-            //Operation oper = new Operation();
-            //oper.getFriendList(fuc.CurFriend)
-            //List<UControl> uc = new List<UControl>();
-            
-            //foreach (UControl msgfuc in this.pn_FriendList.Controls)
-            //{
-            //    if (msgfuc.CurFriend.IP.ToString() == fuc.CurFriend.IP.ToString())
-            //    {
-                    
-            //    }
-            //}
 
+            //fuc.ti_ucfriend.Enabled = true;
+            //FormChat fc = new FormChat(fuc.CurFriend);
+            //Operation
             
-            //fc.Show();
-            //fuc.Fc.Show();
         }
         //private Thread th;
         FormChat fc = new FormChat();

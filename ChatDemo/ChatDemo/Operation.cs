@@ -20,6 +20,10 @@ namespace ChatDemo
 
             _fc = fc;
         }
+        public Operation()
+        {
+           
+        }
         static List<Friend> Listfriend = new List<Friend>();
         //定义委托
         public delegate void delucfshow(Friend friend);
@@ -40,13 +44,15 @@ namespace ChatDemo
             //fuc.for = _fc;
 
             Listfriend.Add(friend);
+            
+            
             //双击事件
             fuc.DoubleClick += new EventHandler(_ffl.fuc_DoubleClick);
 
             fuc.Top = _ffl.pn_FriendList.Controls.Count * fuc.Height;
-
+            fuc.ti_ucfriend.Enabled = true;
             _ffl.pn_FriendList.Controls.Add(fuc);
-
+            
         }
         //public delegate void delucfclose(IPAddress ip);
         ///// <summary>
@@ -165,7 +171,7 @@ namespace ChatDemo
 
                         fLogin.imageIndex = Convert.ToInt32(data[2]);
 
-                        fLogin.formchat = new FormChat(fLogin);
+                        //fLogin.formchat = new FormChat(fLogin);
 
                         object[] paraLogin = new object[1];
 
@@ -191,14 +197,14 @@ namespace ChatDemo
                             }
                             lofucIndex++;
                         }
-                        foreach (UControl lofuc in _ffl.pn_FriendList.Controls)
-                        {
+                        //foreach (UControl lofuc in _ffl.pn_FriendList.Controls)
+                        //{
                             for (int i = lofucIndex; i < _ffl.pn_FriendList.Controls.Count; i++)
                             {
                                 _ffl.pn_FriendList.Controls[i].Top = _ffl.pn_FriendList.Controls[0].Height * i;
                                 
                             }
-                        }
+                        //}
 
                             //if (ip == GetMyIP().ToString())
                             //{
@@ -247,16 +253,26 @@ namespace ChatDemo
                         {
                             continue;
                         }
+                        //foreach (UControl msgfuc in _ffl.pn_FriendList.Controls)
+                        //{
+                        //    for (int i = 0; i < _ffl.pn_FriendList.Controls.Count; i++)
+                        //    {
+                        //        //_fc = msgfuc;
+                        //        //_ffl.pn_FriendList.Controls[i].
+                        //        msgfuc.CurFriend.formchat.txt_content.Text += msgfuc.CurFriend.formchat.lab_name.Text + ":\r\n";
+                        //        msgfuc.CurFriend.formchat.txt_content.Text += data[1] + "\r\n";
+                        //        break;
+                        //        //_fc.txt_content.Text += data[1] + "\r\n";
+                        //    }
+                        //}
                         foreach (UControl msgfuc in _ffl.pn_FriendList.Controls)
                         {
-                            for (int i = 0; i < _ffl.pn_FriendList.Controls.Count; i++)
+                            if (msgfuc.CurFriend.IP.ToString() == ip)
                             {
-                                //_fc = msgfuc;
-                                //_ffl.pn_FriendList.Controls[i].
+                                msgfuc.ti_ucfriend.Enabled = true;
                                 msgfuc.CurFriend.formchat.txt_content.Text += msgfuc.CurFriend.formchat.lab_name.Text + ":\r\n";
                                 msgfuc.CurFriend.formchat.txt_content.Text += data[1] + "\r\n";
                                 break;
-                                //_fc.txt_content.Text += data[1] + "\r\n";
                             }
                         }
 

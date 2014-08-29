@@ -47,15 +47,16 @@ namespace ChatDemo
         
         private void btn_send_Click(object sender, EventArgs e)
         {
-            UdpClient uc = new UdpClient();
-            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(this.lab_IP.Text.ToString()),9527);
-            byte[] bmsg = Encoding.Default.GetBytes(this.txt_msg.Text);
-            uc.Send(bmsg,bmsg.Length,ipep);
+            
+            
+            Operation oper = new Operation();
+            oper.SendMsg(this.lab_IP.Text.ToString(), "MSG|" + this.txt_msg.Text);
             string timetoday = DateTime.Now.ToString() + "\r\n";
             string[] timenow = timetoday.Split(' ');
             this.txt_content.Text += "我" + ' ' + timenow[1];
-            this.txt_content.Text += "MSG|"+this.txt_msg.Text + "\r\n";
+            this.txt_content.Text += this.txt_msg.Text + "\r\n";
             this.txt_msg.Text = "";
+           
         }
         
         private void FormChat_Load(object sender, EventArgs e)
@@ -72,6 +73,13 @@ namespace ChatDemo
             this.lab_IP.Text = ip.ToString();
             this.pic_image.Image = this.cImageList.Images[imageIndex];
             this.Name = "与" + name + "聊天中";
+            //Operation oper = new Operation();
+            //oper.SendMsg(ip.ToString(), "MSG|" + this.txt_msg.Text);
+            
+        }
+
+        private void FormChat_FormClosing(object sender, FormClosingEventArgs e)
+        {
             
         }
     }
